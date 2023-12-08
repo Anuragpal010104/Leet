@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRecoilValue } from 'recoil'
+import Image from 'next/image'
 type AuthPageProps = {};
 
 type Props = {}
@@ -26,7 +27,8 @@ function index({}: Props) {
         <div className="max-w-7xl mx-auto">
             <Navbar/>
             <div className='flex items-center justify-center h-[calc(100vh-5rem)] pointer-events-none select-none'>
-                <img src="/hero.png" alt="Hero"  />
+                <Image src="/hero.png" alt="Hero Image" width={700} height={700} />
+                
             </div>
             {authModal.isOpen && <AuthModel/>}    
         </div>
