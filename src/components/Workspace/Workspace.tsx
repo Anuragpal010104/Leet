@@ -1,6 +1,7 @@
 import React from 'react'
 import Split from 'react-split'
 import ProblemDescription from './ProblemDescription/ProblemDescription'
+import Playground from './Playground/Playground'
 
 type Props = {}
 
@@ -8,10 +9,8 @@ function Workspace({}: Props) {
   return (
     <Split className='split' minSize={0}>
         <ProblemDescription/>
-        <div>
-            <div>Editor</div>
-            <div>Output</div>
-        </div>
+        <Playground/>
+         
     </Split>
   )
 }
