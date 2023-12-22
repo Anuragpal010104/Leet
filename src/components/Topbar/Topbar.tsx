@@ -60,7 +60,7 @@ function Topbar({problemPage}: Props) {
 								<button className='bg-slate-600 py-1 px-2 cursor-pointer rounded '>Sign In</button>
 							</Link>
 					) }
-					{problemPage && <Timer/>}
+					{user && problemPage && <Timer/>}
 					{user && (
 						<div className='cursor-pointer group relative'>
 							<img src="/avatar.png" alt="user profile" className='h-8 w-8 rounded-full' />
