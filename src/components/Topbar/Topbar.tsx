@@ -9,6 +9,9 @@ import Image from 'next/image'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { BsList } from 'react-icons/bs'
 import Timer from '../Timer/Timer'
+import { useRouter } from 'next/router'
+import { problems } from '@/utils/problems'
+import { Problem } from '@/utils/types/problem'
 
 type Props = {
 	problemPage?: boolean;
@@ -17,6 +20,27 @@ type Props = {
 function Topbar({problemPage}: Props) {
 	const [user] = useAuthState(auth);
 	const setAuthModalState = useSetRecoilState(authModalState);
+	const router = useRouter();
+	const handleProblemChange = (isForward: boolean) => {
+		const {order} = problems[router.query.pid as string] as Problem;
+		const direction = isForward ? 1 : -1;
+		const nextProblemOrder = order + direction;
+		const nextProblemKey = Object.keys(problems).find((key)=> problems[key].order === nextProblemOrder);
+
+		if(isForward && !nextProblemKey){
+			const firstProblemKey = Object.keys(problems).find((key)=> problems[key].order === 1);
+			router.push(`/problems/${firstProblemKey}`)
+		}
+		else if(!isForward && !nextProblemKey){
+			const lastProblemKey = Object.keys(problems).find((key)=> problems[key].order === Object.keys(problems).length);
+			router.push(`/problems/${lastProblemKey}`)
+		}
+		else{
+			router.push(`/problems/${nextProblemKey}`)
+		}
+
+	}
+
   return (
     <nav className='relative flex h-[50px] w-full shrink-0 items-center px-5 bg-gray-800 text-gray-400'>
 			<div className={`flex w-full items-center justify-between 
@@ -27,7 +51,10 @@ function Topbar({problemPage}: Props) {
 
 				{problemPage && (
 					<div className='flex items-center gap-4 flex-1 justify-center '>
-						<div className='flex items-center justify-center rounded bg-zinc-600 hover:bg-gray-500 h-8 w-8 cursor-pointer'>
+						<div className='flex items-center justify-center rounded bg-zinc-600 hover:bg-gray-500 h-8 w-8 cursor-pointer'
+						onClick={()=>{
+							handleProblemChange(false)
+						}}>
 							<FaChevronLeft/>
 						</div>
 						<Link href="/" className='flex items-center gap-2 font-medium max-w-[170px] text-gray-100 cursor-pointer'>
@@ -36,7 +63,10 @@ function Topbar({problemPage}: Props) {
 							</div>
 							<p>Problems List</p>
 						</Link>
-						<div className='flex items-center justify-center rounded bg-zinc-600 hover:bg-gray-500 h-8 w-8 cursor-pointer'>
+						<div className='flex items-center justify-center rounded bg-zinc-600 hover:bg-gray-500 h-8 w-8 cursor-pointer'
+						onClick={()=>{
+							handleProblemChange(true)
+						}}>
 							<FaChevronRight/>
 						</div>
 					</div>
