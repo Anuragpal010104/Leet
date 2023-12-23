@@ -26,60 +26,7 @@ const Playground: React.FC<PlaygroundProps> = ({ problem,setSuccess,setSolved })
   const [user] = useAuthState(auth);
   const { query : { pid } } = useRouter();
 
-  // const handleSubmit = async () => {
-  //   if(!user){
-  //     toast.error("You need to login to submit your solution",{
-  //       position: "top-center",
-  //       autoClose: 3000,
-  //       theme: "dark"
-  //     });
-  //     return;
-  //   }
-  //   try {
-  //     userCode = userCode.slice(userCode.indexOf(problem.starterFunctionName));
-  //     const cb = new Function(`return ${userCode}`)();
-  //     const handler = problems[pid as unknown as string].handlerFunction;
 
-  //     if(typeof handler === "function"){
-  //       const success = handler(cb);
-  //       if(success){
-  //         toast.success("Congratulations! All test cases passed",{
-  //           position: "top-center",
-  //           autoClose: 3000,
-  //           theme: "dark"
-  //         });
-  //         setSuccess(true);
-  //         setTimeout(() => {
-  //           setSuccess(false);
-  //         }, 4000);
-          
-  //         const userRef = doc(firestore,"users",user.uid);
-  //         await updateDoc(userRef,{
-  //           solvedProblems: arrayUnion(pid)
-  //         });
-  //         setSolved(true);
-  //       }
-  //     } 
-
-
-  //   } catch (error:any) {
-  //     if(error.message.startsWith("AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:")){
-  //       toast.error("Oops one or more test cases failed",{
-  //         position: "top-center",
-  //         autoClose: 3000,
-  //         theme: "dark"       
-  //       })
-  //     }
-  //     else{
-  //       console.log(error.message);
-  //       toast.error(error.message,{
-  //         position: "top-center",
-  //         autoClose: 3000,
-  //         theme: "dark"       
-  //       })
-  //     }
-  //   }
-  // }
   const handleSubmit = async () => {
 		if (!user) {
 			toast.error("Please login to submit your code", {
