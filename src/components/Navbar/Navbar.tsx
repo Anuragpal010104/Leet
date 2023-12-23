@@ -5,7 +5,7 @@ import { useSetRecoilState } from 'recoil'
 import Image from 'next/image'
 type Props = {}
 
-function navbar({}: Props) {
+const Navbar: React.FC<Props> = () => {
     const setAuthModalState = useSetRecoilState(authModalState)
     const handleClick = () => {
         setAuthModalState((prev)=>({ ...prev, isOpen: true}))
@@ -26,4 +26,4 @@ function navbar({}: Props) {
   )
 }
 
-export default navbar
+export default Navbar
