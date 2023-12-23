@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlineSetting, AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai'
+import { ISettings } from '../Playground'
+// import SettingsModal from '@/components/Modals/SettingsModal';
 
-type PreferencenavProps = {}
+// type PreferencenavProps = {
+// 	settings: ISettings;
+// 	setSettings: React.Dispatch<React.SetStateAction<ISettings>>;
+// }
 
-const PreferenceNav: React.FC<PreferencenavProps> = ({}) => {
+const PreferenceNav: React.FC = ({ }) => {
 	const [isFullScreen, setIsFullScreen] = useState(false);
 	const handleFullScreen = () => {
 		if(isFullScreen) {
@@ -56,6 +61,7 @@ const PreferenceNav: React.FC<PreferencenavProps> = ({}) => {
 					<div className='preferenceBtn-tooltip'>Full Screen</div>
 				</button>
 			</div>
+			{/* {settings.settingModalIsOpen && <SettingsModal />} */}
     </div>
   )
 }
