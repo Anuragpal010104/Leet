@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { problems } from "@/utils/problems";
 import { useRouter } from "next/router";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 
 type PlaygroundProps = {
@@ -22,22 +23,24 @@ type PlaygroundProps = {
 
 export interface ISettings { 
   fontSize: string;
-  settingModalIsOpen: boolean;
+  settingsModalIsOpen: boolean;
   dropdownIsOpen: boolean;
 }
 
 const Playground: React.FC<PlaygroundProps> = ({ problem,setSuccess,setSolved }) => {
   const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
   let [userCode, setUserCode] = useState<string>(problem.starterCode);
-  const [user] = useAuthState(auth);
-  const { query : { pid } } = useRouter();
+  const [fontSize, setFontSize] = useLocalStorage("lcc-fontSize", "16px");
 
   const [settings, setSettings] = useState<ISettings>({ 
     fontSize: "16px",
-    settingModalIsOpen: false,
+    settingsModalIsOpen: false,
     dropdownIsOpen: false,
 
   })
+  
+  const [user] = useAuthState(auth);
+  const { query : { pid } } = useRouter();
 
   const handleSubmit = async () => {
 		if (!user) {
@@ -113,7 +116,7 @@ const Playground: React.FC<PlaygroundProps> = ({ problem,setSuccess,setSolved })
 
   return (
     <div className="flex flex-col bg-zinc-800 relative">
-      <PreferenceNav />
+      <PreferenceNav settings={settings} setSettings={setSettings} />
       <Split
         className="h-[calc(100vh-94px)]"
         direction="vertical"

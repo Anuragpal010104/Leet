@@ -8,9 +8,9 @@ import { setDoc,doc } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 
-type Props = {};
+type SignUpProps = {};
 
-function Signup({}: Props) {
+const Signup: React.FC<SignUpProps> = () => {
     const setAuthModalState = useSetRecoilState(authModalState);
         const handleClick = () => {
 		setAuthModalState((prev) => ({ ...prev, type: "login" }));
@@ -21,33 +21,7 @@ function Signup({}: Props) {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputs((prev)=>({...prev,[e.target.name]:e.target.value}))
     }
-    // const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     if(!inputs.email || !inputs.password || !inputs.displayName) return alert("Please fill all the fields");        
-    //     try {
-    //         toast.loading("Creating your account",{position:"top-center",toastId:"loadingToast"})
-    //         const newUser = await createUserWithEmailAndPassword(inputs.email,inputs.password);
-    //         if(!newUser) return;
-    //         const userData{
-    //             uid:newUser.user.uid,
-    //             email:newUser.user.email,
-    //             displayName:inputs.displayName,
-    //             createdAt:Date.now(),
-    //             updatedAt:Date.now(),
-    //             likedProblems:[],
-    //             dislikedProblems:[],
-    //             solvedProblems:[],
-    //             starredProblems:[],
-    //         }
-    //         await setDoc(doc(firestore,"users",newUser.user.uid),userData);
-    //         router.push("/")
-    //     } catch (error:any) {
-    //         toast.error(error.message,{position:"top-center"})
-    //     }
-    //     finally{
-    //         toast.dismiss("loadingToast")
-    //     }
-    // }
+  
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (!inputs.email || !inputs.password || !inputs.displayName) return alert("Please fill all fields");

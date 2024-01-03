@@ -1,10 +1,10 @@
-import { auth } from '@/firebase/firebase';
-import React from 'react'
-import { useSignOut } from 'react-firebase-hooks/auth';
-import { FiLogOut } from 'react-icons/fi'
-type Props = {}
+import { auth } from "@/firebase/firebase";
+import React from "react";
+import { useSignOut } from "react-firebase-hooks/auth";
+import { FiLogOut } from "react-icons/fi";
 
-function Logout({}: Props) {
+
+const Logout:React.FC = () => {
     const [signOut,loading,error] = useSignOut(auth);
     const handleLogout = () => {
         signOut();
@@ -15,7 +15,7 @@ function Logout({}: Props) {
     >
         <FiLogOut/>
     </button>
-  )
-}
+  );
+};
 
-export default Logout
+export default Logout;

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlineSetting, AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai'
 import { ISettings } from '../Playground'
-// import SettingsModal from '@/components/Modals/SettingsModal';
+import SettingsModal from '@/components/Modals/SettingsModal'
 
-// type PreferencenavProps = {
-// 	settings: ISettings;
-// 	setSettings: React.Dispatch<React.SetStateAction<ISettings>>;
-// }
+type PreferencenavProps = {
+	settings: ISettings;
+	setSettings: React.Dispatch<React.SetStateAction<ISettings>>;
+}
 
-const PreferenceNav: React.FC = ({ }) => {
+const PreferenceNav: React.FC<PreferencenavProps> = ({ setSettings, settings }) => {
 	const [isFullScreen, setIsFullScreen] = useState(false);
 	const handleFullScreen = () => {
 		if(isFullScreen) {
@@ -47,7 +47,9 @@ const PreferenceNav: React.FC = ({ }) => {
 			</div>
 
 			<div className='flex items-center m-2'>
-				<button className='preferenceBtn group'>
+				<button className='preferenceBtn group'
+				onClick={() => setSettings({ ...settings, settingsModalIsOpen: true })}
+				>
 					<div className='h-4 w-4 text-gray-400 font-bold text-lg'>
 						<AiOutlineSetting />
 					</div>
@@ -61,7 +63,7 @@ const PreferenceNav: React.FC = ({ }) => {
 					<div className='preferenceBtn-tooltip'>Full Screen</div>
 				</button>
 			</div>
-			{/* {settings.settingModalIsOpen && <SettingsModal />} */}
+			{settings.settingsModalIsOpen && <SettingsModal settings={settings} setSettings={setSettings} />}
     </div>
   )
 }

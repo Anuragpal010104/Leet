@@ -5,11 +5,11 @@ import Signup from './Signup'
 import ResetPass from './ResetPass'
 import { authModalState } from '@/atoms/authModalAtom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { type } from 'os'
 
-type Props = {}
 
-function AuthModel({}: Props) {
+type AuthModalProps = {}
+
+const AuthModel: React.FC<AuthModalProps> = () => {
     const authModal = useRecoilValue(authModalState);
     const closeModal = useCloseModal();
   return (
@@ -26,7 +26,8 @@ function AuthModel({}: Props) {
                             <IoClose className='h-5 w-5'/>
                         </button>
                     </div>
-                    {authModal.type === "login" ? <Login /> : authModal.type === "signup" ? <Signup /> : <ResetPass />}
+                    {authModal.type === "login" ? <Login /> : authModal.type === "register" ? <Signup /> : <ResetPass />}
+
                 </div>
             </div>
         </div>
@@ -34,7 +35,7 @@ function AuthModel({}: Props) {
   )
 }
 
-export default AuthModel
+export default AuthModel;
 
 function useCloseModal() {
     const setAuthModal = useSetRecoilState(authModalState);
@@ -51,7 +52,7 @@ function useCloseModal() {
       }
       window.addEventListener("keydown", handleEsc);
       return () => window.removeEventListener("keydown", handleEsc);
-    },[closeModal]);
+    },[]);
 
     return closeModal;
 }
