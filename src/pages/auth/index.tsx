@@ -9,9 +9,7 @@ import { useRecoilValue } from 'recoil'
 import Image from 'next/image'
 type AuthPageProps = {};
 
-type Props = {}
-
-function index({}: Props) {
+const AuthPage:React.FC<AuthPageProps> = () => {
     const authModal = useRecoilValue(authModalState);
     const [user,error,loading] = useAuthState(auth);
     const router = useRouter();
@@ -36,4 +34,4 @@ function index({}: Props) {
   )
 }
 
-export default index
+export default AuthPage;

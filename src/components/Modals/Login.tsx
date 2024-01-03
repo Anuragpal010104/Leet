@@ -10,7 +10,7 @@ type LoginProps = {}
 
 const Login:React.FC<LoginProps> = () => {
 	const setAuthModalState = useSetRecoilState(authModalState);
-	const handleClick = (type: "login" | "signup" | "forgotPassword") => {
+	const handleClick = (type: "login" | "register" | "forgotPassword") => {
 		setAuthModalState((prev) => ({ ...prev, type: type as "login" | "forgotPassword" | "register" }));
 	};
   
@@ -72,7 +72,7 @@ const Login:React.FC<LoginProps> = () => {
         </button>
         <div className='text-sm font-medium text-gray-300'>
             Not Registererd
-            <a href="#" className='text-blue-700 hover:underline' onClick={() => handleClick("signup")}>
+            <a href="#" className='text-blue-700 hover:underline' onClick={() => handleClick("register")}>
                 Create an account
             </a>
         </div>
